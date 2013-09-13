@@ -1,23 +1,15 @@
-#include "gracz.h"
-#include "gra.h"
-#include "karta.h"
-#include "plansza.h"
+#include <iostream>
+#include <vector>
 
-#include<iostream>
-#include <cstdio>
-#include <cstdlib>
+#include "Gra.h"
 
 using namespace std;
 
-
-
 int main ()
 {
-	gra G;
-	G.liczbaRozdan=2;
-	G.ktoWistuje=0;
-	G.liczbagraczy=4;
-	G.numerRozdania=1;
-	
-	G.odpalGre();
+	vector<bool> g (2, 0);
+	g[0] = 1;
+	vector<int> r (2, 2);
+	Gra gra(g, r);
+	gra.uruchom();
 }
