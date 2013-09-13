@@ -9,7 +9,11 @@ using namespace std;
 GraczZywy::GraczZywy(int nr) :Gracz(nr) { };
 
 int GraczZywy::wybierzDeklaracje() {
-	return reka.size() / plansza->liczbaGraczy();
+	cout << "gracz nr." << nr << ": WYBIERZ DEKLARACJE" << endl;
+	cout << "Twoja reka: " << wypiszReke() << endl;
+	int d;
+	cin >> d;
+	return d;
 }
 
 int GraczZywy::wybierzIndeksKarty() {
@@ -17,7 +21,12 @@ int GraczZywy::wybierzIndeksKarty() {
 	cout << "Twoja reka: " << wypiszReke() << endl;
 	int indeks;
 	cin >> indeks;
-	indeks = min(indeks, (int)reka.size() - 1);
+	
+	while(!kartaOIndeksiePoprawna(indeks)) {
+		cout << "ZLE! " << reka[indeks] << " nie jest poprawna karta" << endl;
+		cin >> indeks;
+	}
+	
 	cout<< "wybrano " << reka[indeks] << endl;
 	return indeks;
 }

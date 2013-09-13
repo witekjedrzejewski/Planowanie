@@ -10,7 +10,10 @@ class Gracz {
 	
 public:
 	Gracz(int nr);
-	void setReka(std::vector<Karta> reka);
+	
+	virtual ~Gracz();
+	
+	virtual void setReka(std::vector<Karta> reka);
 	void setPlansza(Plansza* plansza);
 	
 	void deklaruj();
@@ -21,7 +24,9 @@ public:
 protected:
 	virtual int wybierzIndeksKarty() = 0;
 	virtual int wybierzDeklaracje() = 0;
-	void usunKarteOIndeksie(int i);
+	virtual void usunKarteOIndeksie(int i);
+	bool kartaOIndeksiePoprawna(int i);
+	virtual bool posiadaKartyWKolorze(int kol);
 	
 	std::vector<Karta> reka;
 	Plansza* plansza;

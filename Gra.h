@@ -8,7 +8,8 @@
 class Gra {
 
 public:
-	Gra(int liczbaGraczy, std::vector<int>liczbyKart);
+	Gra(const std::vector<bool>& gracze, const std::vector<int>& liczbyKart);
+	void uruchom();
 
 private:
 	void grajRozdanie(int liczbaKart, int ktoWistuje);
@@ -19,5 +20,9 @@ private:
 	int liczbaGraczy;
 	Plansza* plansza;
 	std::vector<Gracz*> gracze;
+	
+	std::vector<bool> zywiGracze;
+	std::vector<int> liczbyKart;
+
 };
 #endif

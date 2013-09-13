@@ -8,6 +8,7 @@ Plansza::Plansza(int liczbaGraczy) : _liczbaGraczy(liczbaGraczy) {
 	_stol = vector<Karta>(liczbaGraczy);
 	_deklaracje = vector<int>(liczbaGraczy);
 	_wziete = vector<int>(liczbaGraczy);
+	_punkty = vector<int>(liczbaGraczy, 0);
 }
 
 void Plansza::setLiczbaKart(int l) {
@@ -22,6 +23,14 @@ int Plansza::liczbaGraczy() {
 	return _liczbaGraczy;
 }
 
+int Plansza::ktoWychodzi() {
+	return _ktoWychodzi;
+}
+
+int Plansza::kolorWyjscia() {
+	return _kolorWyjscia;
+}
+
 vector<Karta> Plansza::stol() {
 	return _stol;
 }
@@ -31,16 +40,45 @@ vector<int> Plansza::wziete() {
 }
 
 pair<int, vector<Karta> > Plansza::ostatniaLewa() {
-	return make_pair(wzialOstatnia, _ostatniaLewa);
+	return make_pair(_wychodzilOstatnio, _ostatniaLewa);
 }
 
 int Plansza::ktoWyklada() {
 	return _ktoWyklada;
 }
 
+int Plansza::punktyZa(int wziete, int deklarowane) {
+	return wziete + ((wziete == deklarowane) ? _liczbaKart : 0);
+}
+
+void Plansza::zeruj(vector<int>& v) {
+	fill(v.begin(), v.end(), 0);
+}
+
+void Plansza::podsumujRozdanie() {
+	cout << "Wyniki (wziete/deklarowane): ";
+	for (int i = 0; i < _liczbaGraczy; i++) {
+		int punkty = punktyZa(_wziete[i], _deklaracje[i]);
+		cout << i << ": " << punkty << "(" << _wziete[i] 
+						<< "/" << _deklaracje[i] << ") ";
+		_punkty[i] += punkty;
+	}
+	cout << endl;
+	
+	zeruj(_wziete); 
+}
+
+void Plansza::wypiszWynikiGry() {
+	cout << "WYNIKI GRY: " << endl;
+	for (int i = 0; i < _liczbaGraczy; i++) {
+		cout << i << ": " << _punkty[i] << " ";
+	}
+	cout << endl;
+}
+
 void Plansza::dolozKarteOdGracza(Karta k, int nr) {
 	assert(nr == _ktoWyklada);
-	cout << "Plansza.dolozKarte(" << k << " od gracza " << nr << ")" << endl;
+	cout << "-> " << k << " od gracza " << nr << ")" << endl;
 	_stol[nr] = k;
 	if (nr == _ktoWychodzi) {
 		_kolorWyjscia=k.kolor();
@@ -53,7 +91,13 @@ void Plansza::dolozKarteOdGracza(Karta k, int nr) {
 }
 
 void Plansza::zakonczLewe() {
-	cout << "Plansza.zakonczLewe" << endl;
+	// cerr << "Plansza.zakonczLewe" << endl;
+	
+	// zapisanie historii
+	_ostatniaLewa = _stol;
+	_wychodzilOstatnio = _ktoWychodzi;
+	
+	// wylonienie zwyciezcy
 	int wygrany = _ktoWychodzi;
 	int i = _ktoWychodzi;
 	do {
@@ -67,16 +111,14 @@ void Plansza::zakonczLewe() {
 	_ktoWychodzi = _ktoWyklada = wygrany;
 	_wziete[wygrany]++;
 	
-	_ostatniaLewa = _stol;
-	wzialOstatnia = wygrany;
-	
 	czyscStol();
 }
 
 void Plansza::czyscStol() {
-	cout << "Plansza.czyscStol" << endl;
+	//cerr << "Plansza.czyscStol" << endl;
+	
 	for (unsigned i = 0; i < _stol.size(); i++) {
-		_stol[i] = Karta();
+		_stol[i] = Karta(); /* TODO pusta karta */
 	}
 }
 

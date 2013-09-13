@@ -3,8 +3,13 @@
 
 #include "Gra.h"
 
+using namespace std;
+
 int main ()
 {
-	std::vector<int> r (1, 5);
-	Gra gra(2, r);
+	vector<bool> g (2, 0);
+	g[0] = 1;
+	vector<int> r (2, 2);
+	Gra gra(g, r);
+	gra.uruchom();
 }

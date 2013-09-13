@@ -3,31 +3,48 @@
 #include "Gra.h"
 #include "Talia.h"
 #include "GraczZywy.h"
+#include "GraczBot.h"
 
 using namespace std;
 
-Gra::Gra(int g, vector<int> liczbyKart) : liczbaGraczy(g) {
-	
-	cout << "gra(" << g << ")" <<endl;
+Gra::Gra(const vector<bool>& g, const vector<int>& k) 
+	: zywiGracze(g), liczbyKart(k) { }
+
+void Gra::uruchom() {
+	cout << "ROZPOCZYNAM GRE" << endl;
+	liczbaGraczy = zywiGracze.size();
 	
 	plansza = new Plansza(liczbaGraczy);
-	cout << "plansza ready" << endl;
+	
+	cout << "Gracze:" << endl;
+	
 	for (int i = 0; i < liczbaGraczy; i++) {
-		gracze.push_back(new GraczZywy(i));
-		gracze[i]->setPlansza(plansza);
+		cout << i << ": ";
+		if (zywiGracze[i]) {
+			cout << "zywy";
+			gracze.push_back(new GraczZywy(i));
+		} else {
+			cout << "bot";
+			gracze.push_back(new GraczBot(i));
+		}
+		gracze.back()->setPlansza(plansza);
+		cout << endl;
 	}
+	
+	cout << endl;
 	
 	int ktoWistuje = 0;
 	for (unsigned i = 0; i < liczbyKart.size(); i++) {
 		grajRozdanie(liczbyKart[i], ktoWistuje);
 		ktoWistuje = plansza->kolejnyGracz(ktoWistuje);
 	}
+	plansza->wypiszWynikiGry();
 	cout << "KONIEC" << endl;
 }
 
 void Gra::grajRozdanie(int liczbaKart, int ktoWistuje) {
 
-	cout<<"Gra.grajRozdanie("<< liczbaKart 
+	cout << "Rozdanie (" << liczbaKart 
 		<< " kart, wist: " << ktoWistuje << ")" << endl;
 	
 	plansza->setLiczbaKart(liczbaKart);
@@ -37,11 +54,13 @@ void Gra::grajRozdanie(int liczbaKart, int ktoWistuje) {
 	for (int i = 0; i < liczbaKart; i++) {
 		grajLewe();
 	}
+	plansza->podsumujRozdanie();
 }
 
 void Gra::grajLewe()
 {
-	cout << "Gra.grajLewe()" << endl;
+	// cerr << "Gra.grajLewe()" << endl;
+	
 	for (int i = 0; i < liczbaGraczy; i++) {
 		gracze[plansza->ktoWyklada()]->grajKarte();
 	}
@@ -49,7 +68,8 @@ void Gra::grajLewe()
 
 void Gra::rozdajKarty(int liczbaKart)
 {
-	cout << "Gra.rozdajKarty" << endl;
+	// cerr << "Gra.rozdajKarty" << endl;
+
 	Talia talia;
 	for (int i = 0; i < liczbaGraczy; i++) {
 		gracze[i]->setReka(talia.getKarty(liczbaKart));
@@ -58,7 +78,7 @@ void Gra::rozdajKarty(int liczbaKart)
 
 void Gra::pobierzDeklaracje()
 {
-	cout << "Gra.pobierzDeklaracje" << endl;
+	cout << "Deklaracje: " << endl;
 	for (int i = 0; i < liczbaGraczy; i++) {
 		gracze[i]->deklaruj();
 	}

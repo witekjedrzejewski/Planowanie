@@ -14,10 +14,12 @@ Talia::Talia() {
 	}
 	random_shuffle(karty.begin(), karty.end(), Talia::mRand);
 	
+	/*
 	for (int i = 0; i < 52; i++) {
 		cout << karty[i] << ".";
 	}
 	cout << endl;
+	*/
 }
 
 Karta Talia::getKarta() {
