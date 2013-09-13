@@ -2,6 +2,7 @@
 #define gracz_H_
 
 #include <vector>
+#include <set>
 
 #include "Karta.h"
 #include "Plansza.h"
@@ -22,36 +23,24 @@ public:
 	std::string wypiszReke();
 
 protected:
-	virtual int wybierzIndeksKarty() = 0;
+	
+	struct KartyComparator {
+		bool operator() (const Karta&, const Karta&) const;
+	};
+	
+	typedef std::set<Karta, KartyComparator> ZestawKart;
+	typedef ZestawKart::iterator ItKarta;
+	
+	virtual ItKarta wybierzKarte() = 0;
 	virtual int wybierzDeklaracje() = 0;
-	virtual void usunKarteOIndeksie(int i);
-	bool kartaOIndeksiePoprawna(int i);
+	virtual void usunKarte(ItKarta iter);
+	bool kartaPoprawna(ItKarta iter);
 	virtual bool posiadaKartyWKolorze(int kol);
 	
-	std::vector<Karta> reka;
+	ZestawKart reka;
 	Plansza* plansza;
 	int nr;
-	
-	/*
-	karta reka[13];
-	int liczbaLew;
-	int deklaracja;
-	int kartyWKolorze[5];
-	int punkty;
-	plansza *wskPlansza;
-	void dajZnacZeDostajeszKarty();
-	void wezKarte (karta k);
-	virtual void licytuj ();
-	virtual void doluzKarte ();
-	void dajZnacZeRozdajesz();
-	void wyswietlStol();
-	void wyswietlKarty();
-	karta kartaOZnakach(char wys, char kol);
-	void jakZapisacTeKarte(karta k, char c[2]);
-	bool kartaPoprawna(karta k);
-	void dodajPunktyZaRozdanie();
-	void zakonczRozdanie();
-	int numer;*/
+
 };
 
 #endif

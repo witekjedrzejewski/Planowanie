@@ -12,30 +12,30 @@ public:
 	Plansza(int liczbaGraczy);
 	
 	/* karty aktualnie lezace na stole */
-	std::vector<Karta> stol();
+	std::vector<Karta> stol() const;
 	
 	/* deklaracje poszczegolnych graczy */
-	std::vector<int> deklaracje();
+	std::vector<int> deklaracje() const;
 	
 	/* wyniki punktowe */
-	std::vector<int> wyniki();
+	std::vector<int> wyniki() const;
 	
 	/* ile ugrali w tym rozdaniu poszczegolnie gracze */
-	std::vector<int> wziete();
+	std::vector<int> wziete() const;
 	
 	/* kto wyszedl, dolozone karty */
-	std::pair<int, std::vector<Karta> > ostatniaLewa();
+	std::pair<int, std::vector<Karta> > ostatniaLewa() const;
 	
 	/* nr gracza ktory powinien wylozyc pierwszy w aktualnej lewie */
-	int ktoWychodzi();
+	int ktoWychodzi() const;
 	
 	/* nr gracza ktory powinien teraz wylozyc karte */
-	int ktoWyklada();
+	int ktoWyklada() const;
 	
-	int liczbaGraczy();
+	int liczbaGraczy() const;
 	
 	/* kolor w ktorym jest wylozona karta */
-	int kolorWyjscia();
+	int kolorWyjscia() const;
 	
 	/* przyjmuje karte k od gracza z numerem nr */
 	void dolozKarteOdGracza(Karta k, int nr);

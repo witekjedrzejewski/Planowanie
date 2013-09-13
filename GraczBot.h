@@ -7,8 +7,10 @@ class GraczBot : public Gracz {
 	
 public:
 	GraczBot(int);
+
+protected:
 	virtual int wybierzDeklaracje();
-	virtual int wybierzIndeksKarty();
+	virtual ItKarta wybierzKarte();
 };
 
 #endif

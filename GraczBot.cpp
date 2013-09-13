@@ -10,12 +10,12 @@ int GraczBot::wybierzDeklaracje() {
 	return d;
 }
 
-int GraczBot::wybierzIndeksKarty() {
-	int idx = 0;
-	while(!kartaOIndeksiePoprawna(idx)) {
-		idx++;
+Gracz::ItKarta GraczBot::wybierzKarte() {
+	ItKarta iter = reka.begin();
+	while(!kartaPoprawna(iter)) {
+		iter++;
 	}
-	cerr << "Gracz " << nr << " wybiera " << reka[idx]
+	cerr << "Gracz " << nr << " wybiera " << *iter
 					<< " ( z " << wypiszReke() << ")" << endl;
-	return idx;
+	return iter;
 }

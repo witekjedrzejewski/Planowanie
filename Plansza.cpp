@@ -19,31 +19,31 @@ void Plansza::setKtoWistuje(int w) {
 	_ktoWistuje = _ktoWychodzi = _ktoWyklada = w;
 }
 
-int Plansza::liczbaGraczy() {
+int Plansza::liczbaGraczy() const {
 	return _liczbaGraczy;
 }
 
-int Plansza::ktoWychodzi() {
+int Plansza::ktoWychodzi() const {
 	return _ktoWychodzi;
 }
 
-int Plansza::kolorWyjscia() {
+int Plansza::kolorWyjscia() const {
 	return _kolorWyjscia;
 }
 
-vector<Karta> Plansza::stol() {
+vector<Karta> Plansza::stol() const {
 	return _stol;
 }
 
-vector<int> Plansza::wziete() {
+vector<int> Plansza::wziete() const {
 	return _wziete;
 }
 
-pair<int, vector<Karta> > Plansza::ostatniaLewa() {
+pair<int, vector<Karta> > Plansza::ostatniaLewa() const {
 	return make_pair(_wychodzilOstatnio, _ostatniaLewa);
 }
 
-int Plansza::ktoWyklada() {
+int Plansza::ktoWyklada() const {
 	return _ktoWyklada;
 }
 
