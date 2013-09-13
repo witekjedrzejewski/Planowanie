@@ -1,22 +1,10 @@
-#ifndef gracz_H_
-#define gracz_H_
-
-
-#include "gracz.h"
-#include "gra.h"
-#include "karta.h"
-#include "plansza.h"
-
-#include "bot(gracz).h"
-#include<iostream>
-#include <cstdio>
-#include <cstdlib>
-
+#include "GraczBot.h"
 using namespace std;
 
+/*
 void bot::licytuj()
 {
-	deklaracja=0;
+	int d = 0;
 	cout<<"gracz nr."<<numer<<" deklaruje "<< deklaracja<< " lew"<<endl;
 }
 
@@ -59,6 +47,4 @@ void bot::doluzKarte()
 	reka[i].kolor=0;
 	kartyWKolorze[k.kolor]--;
 }
-
-
-#endif
+*/

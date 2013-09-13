@@ -1,13 +1,33 @@
 #ifndef gracz_H_
 #define gracz_H_
 
-#include "gra.h"
-#include "karta.h"
-#include "plansza.h"
+#include <vector>
 
+#include "Karta.h"
+#include "Plansza.h"
 
-class gracz{
-	public:
+class Gracz {
+	
+public:
+	Gracz(int nr);
+	void setReka(std::vector<Karta> reka);
+	void setPlansza(Plansza* plansza);
+	
+	void deklaruj();
+	void grajKarte();
+	
+	std::string wypiszReke();
+
+protected:
+	virtual int wybierzIndeksKarty() = 0;
+	virtual int wybierzDeklaracje() = 0;
+	void usunKarteOIndeksie(int i);
+	
+	std::vector<Karta> reka;
+	Plansza* plansza;
+	int nr;
+	
+	/*
 	karta reka[13];
 	int liczbaLew;
 	int deklaracja;
@@ -26,12 +46,7 @@ class gracz{
 	bool kartaPoprawna(karta k);
 	void dodajPunktyZaRozdanie();
 	void zakonczRozdanie();
-	int numer;
-	gracz()
-	{
-		punkty=0;
-		liczbaLew=0;
-	}
+	int numer;*/
 };
 
 #endif
