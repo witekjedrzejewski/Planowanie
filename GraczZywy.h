@@ -6,10 +6,11 @@
 class GraczZywy : public Gracz {
 public:
 	GraczZywy(int);
+protected:		
 	virtual int wybierzDeklaracje();
-	virtual int wybierzIndeksKarty();
+	virtual ItKarta wybierzKarte();
 private:
-
+	ItKarta wczytajKarte();
 };
 
 #endif	/* GRACZZYWY_H */

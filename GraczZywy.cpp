@@ -16,17 +16,26 @@ int GraczZywy::wybierzDeklaracje() {
 	return d;
 }
 
-int GraczZywy::wybierzIndeksKarty() {
-	cout << "gracz nr." << nr << ": WYBIERZ INDEKS KARTY" << endl;
-	cout << "Twoja reka: " << wypiszReke() << endl;
-	int indeks;
-	cin >> indeks;
+Gracz::ItKarta GraczZywy::wczytajKarte() {
+
+	string opis;
 	
-	while(!kartaOIndeksiePoprawna(indeks)) {
-		cout << "ZLE! " << reka[indeks] << " nie jest poprawna karta" << endl;
-		cin >> indeks;
+	cin >> opis;
+	Karta k(opis);
+	return reka.find(k);
+}
+
+Gracz::ItKarta GraczZywy::wybierzKarte() {
+	cout << "gracz nr." << nr << ": WPISZ KARTE" << endl;
+	cout << "Twoja reka: " << wypiszReke() << endl;
+	
+	ItKarta iter = wczytajKarte();
+	
+	while(!kartaPoprawna(iter)) {
+		cout << "ZLE! Niedozwolony ruch" << endl;
+		iter = wczytajKarte();
 	}
 	
-	cout<< "wybrano " << reka[indeks] << endl;
-	return indeks;
+	cout<< "wybrano " << *iter << endl;
+	return iter;
 }
