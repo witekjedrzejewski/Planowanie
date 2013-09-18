@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
+#include <ctime>
 
 #include "Talia.h"
 
