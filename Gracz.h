@@ -7,51 +7,32 @@
 #include "Plansza.h"
 
 class Gracz {
-	
 public:
-	Gracz(int nr);
-	
-	virtual ~Gracz();
-	
-	virtual void setReka(std::vector<Karta> reka);
-	void setPlansza(Plansza* plansza);
-	
-	void deklaruj();
-	void grajKarte();
-	
-	std::string wypiszReke();
+    Gracz(int nr);
+
+    virtual ~Gracz();
+
+    virtual void setReka(std::vector<Karta> reka);
+    void setPlansza(Plansza* plansza);
+
+    void deklaruj();
+    void grajKarte();
+
+    std::string wypiszReke();
 
 protected:
-	virtual int wybierzIndeksKarty() = 0;
-	virtual int wybierzDeklaracje() = 0;
-	virtual void usunKarteOIndeksie(int i);
-	bool kartaOIndeksiePoprawna(int i);
-	virtual bool posiadaKartyWKolorze(int kol);
-	
-	std::vector<Karta> reka;
-	Plansza* plansza;
-	int nr;
-	
-	/*
-	karta reka[13];
-	int liczbaLew;
-	int deklaracja;
-	int kartyWKolorze[5];
-	int punkty;
-	plansza *wskPlansza;
-	void dajZnacZeDostajeszKarty();
-	void wezKarte (karta k);
-	virtual void licytuj ();
-	virtual void doluzKarte ();
-	void dajZnacZeRozdajesz();
-	void wyswietlStol();
-	void wyswietlKarty();
-	karta kartaOZnakach(char wys, char kol);
-	void jakZapisacTeKarte(karta k, char c[2]);
-	bool kartaPoprawna(karta k);
-	void dodajPunktyZaRozdanie();
-	void zakonczRozdanie();
-	int numer;*/
+
+    virtual int numerKarty(Karta k) const;
+    virtual Karta kartaONumerze(int nrKarty) const;
+    virtual int wybierzNumerKarty() = 0;
+    virtual int wybierzDeklaracje() = 0;
+    virtual void usunKarteONumerze(int nrKarty);
+    virtual bool kartaONumerzePoprawna(int i) const;
+    virtual bool posiadaKartyWKolorze(int kol) const;
+
+    std::vector<Karta> reka;
+    Plansza* plansza;
+    int nr;
 };
 
 #endif

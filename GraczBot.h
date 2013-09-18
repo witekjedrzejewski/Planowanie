@@ -4,11 +4,12 @@
 #include "Gracz.h"
 
 class GraczBot : public Gracz {
-	
 public:
-	GraczBot(int);
-	virtual int wybierzDeklaracje();
-	virtual int wybierzIndeksKarty();
+    GraczBot(int);
+    virtual ~GraczBot();
+    virtual int wybierzNumerKarty();
+
+    virtual Karta wybierzKarte() = 0;
 };
 
 #endif

@@ -2,7 +2,7 @@ GCC = g++
 FLAGS = -Wall -O2
 
 BIN = planowanie
-SOURCES = Gra Gracz Plansza Karta GraczBot GraczZywy Talia
+SOURCES = Gra Gracz Plansza Karta GraczBot GraczZywy Talia GraczBotProsty
 OBJECTS = $(addsuffix .o, $(SOURCES))
 
 all: $(BIN)

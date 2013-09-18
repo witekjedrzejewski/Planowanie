@@ -5,9 +5,9 @@
 
 class GraczZywy : public Gracz {
 public:
-	GraczZywy(int);
-	virtual int wybierzDeklaracje();
-	virtual int wybierzIndeksKarty();
+    GraczZywy(int);
+    virtual int wybierzDeklaracje();
+    virtual int wybierzNumerKarty();
 private:
 
 };

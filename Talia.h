@@ -5,15 +5,14 @@
 #include "Karta.h"
 
 class Talia {
-
 public:
-	Talia();
-	Karta getKarta();
-	std::vector<Karta> getKarty(int liczbaKart);
-	
+    Talia();
+    Karta getKarta();
+    std::vector<Karta> getKarty(int liczbaKart);
+
 private:
-	std::vector<Karta> karty;
-	static int mRand(int i);
+    std::vector<Karta> karty;
+    static int mRand(int i);
 };
 
 #endif	/* TALIA_H */
