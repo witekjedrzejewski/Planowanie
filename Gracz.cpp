@@ -22,21 +22,22 @@ void Gracz::deklaruj() {
 void Gracz::grajKarte() {
 	cout << "Gracz " << nr << ": grajKarte" << endl;
 	
-	ItKarta iter;
+	int indeks;
 	
 	if (reka.size() == 1) { // specjalny przypadek
-		iter = reka.begin();
+		indeks = 0;
 	} else {
-		iter = wybierzKarte();
-		assert(kartaPoprawna(iter));
+		indeks = wybierzIndeksKarty();
+		assert(kartaOIndeksiePoprawna(indeks));
 	}
 	
-	plansza->dolozKarteOdGracza(*iter, nr);
-	usunKarte(iter);
+	Karta k = reka[indeks];
+	plansza->dolozKarteOdGracza(k, nr);
+	usunKarteOIndeksie(indeks);
 }
 
 void Gracz::setReka(std::vector<Karta> r) {
-	reka = ZestawKart(r.begin(), r.end());
+	reka = r;
 }
 
 void Gracz::setPlansza(Plansza* p) {
@@ -45,28 +46,27 @@ void Gracz::setPlansza(Plansza* p) {
 
 string Gracz::wypiszReke() {
 	ostringstream oss;
-	for (ItKarta it = reka.begin(); it != reka.end(); it++) {
-		oss << *it << " ";
+	for (unsigned i = 0; i < reka.size(); i++) {
+		oss << reka[i] << " ";
 	}
 	return oss.str();
 }
 
-void Gracz::usunKarte(ItKarta iter) {
-	reka.erase(iter);
+void Gracz::usunKarteOIndeksie(int i) {
+	swap(reka[i], reka[reka.size()-1]);
+	reka.pop_back();
 }
 
-bool Gracz::kartaPoprawna (ItKarta iter)
+bool Gracz::kartaOIndeksiePoprawna (int i)
 {
-	if (iter == reka.end()) {
-		cerr << "nie znaleziona" << endl;
-		return false;
-	}
-	
+	if (i >= (int)reka.size() || i < 0)
+		return false; // nie ma takiego indeksu
+
 	int wychodzi = plansza->ktoWychodzi();
 	if (nr == wychodzi)
 		return true; // my wykladamy, wiec dowolna karta
 	
-	Karta k = *iter;
+	Karta k = reka[i];
 	int kolWyjscia = plansza->kolorWyjscia();
 	if (k.kolor() == kolWyjscia)
 		return true; // dolozone do koloru
@@ -75,15 +75,9 @@ bool Gracz::kartaPoprawna (ItKarta iter)
 }
 
 bool Gracz::posiadaKartyWKolorze(int kol) {
-	for (ItKarta it = reka.begin(); it != reka.end(); it++) {
-		if (it->kolor() == kol)
+	for (unsigned i = 0; i < reka.size(); i++) {
+		if (reka[i].kolor() == kol)
 			return true;
 	}
 	return false;
-}
-
-bool Gracz::KartyComparator::operator() (const Karta& a, const Karta& b) const {
-	if (a.kolor() == b.kolor())
-		return a.wysokosc() > b.wysokosc();
-	return a.kolor() < b.kolor();
 }
